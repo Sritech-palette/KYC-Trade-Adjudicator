@@ -71,3 +71,13 @@ Execute sample trade finance scenarios demonstrating both automated approval and
 - **Missing Python Dependencies:** Installing `langgraph`, `langchain-google-genai`, `pydantic`, and `pytest` inside a dedicated virtual environment resolved missing-module errors and made runs repeatable across setups.
 - **Gemini Model Availability (`2.5` vs. `3.5`):** When one Gemini tier was busy or unavailable during testing, switching across `gemini-2.5` / `gemini-3.5-flash-lite` alongside timeout and retry handling kept extraction moving reliably.
 - **Edge Cases & HITL Serialization:** Handling missing or `null` `buyer_name` values (normalized to `"Unknown"`), checking line-item arithmetic, and using `JsonPlusSerializer` ensured `human_review` interrupts and resumes stayed intact.
+
+
+### NOTE
+---
+
+## Sample Data & Testing
+
+- **Synthetic Scenarios:** Current execution and test runs use controlled sample/fixture trade finance cases covering clean auto-approvable invoices, missing/null counterparty fields (`buyer_name` $\rightarrow$ `"Unknown"`), line-item arithmetic discrepancies, and `human_review` approval/rejection paths.
+- **Privacy & Determinism:** Using synthetic fixtures avoids exposing sensitive KYC/trade data while making edge-case testing repeatable and deterministic.
+- **Extending with External Data:** Additional sample JSON/CSV payloads or public invoice benchmarks can be mapped into the Pydantic schemas in `schemas.py` for broader evaluation.
