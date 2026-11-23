@@ -1,6 +1,6 @@
 # KYC & Trade Finance Adjudicator
 
-An agentic KYC and trade finance invoice adjudication pipeline built with **LangGraph** and **Gemini (`gemini-3.5-flash-lite`)**. It automates structured data extraction from trade documents, enforces deterministic schema and line-item arithmetic checks, auto-approves low-risk invoices, and pauses flagged or high-value cases at a durable **Human-in-the-Loop (`human_review`)** checkpoint for compliance officer sign-off.
+An agentic KYC and trade finance invoice adjudication pipeline built with **LangGraph** and **Gemini (`gemini-3.5-flash-lite`). It automates structured data extraction from trade documents, enforces deterministic schema and line-item arithmetic checks, auto-approves low-risk invoices, and pauses flagged or high-value cases at a durable **Human-in-the-Loop (`human_review`)** checkpoint for compliance officer sign-off.
 
 ---
 
@@ -74,7 +74,6 @@ Execute sample trade finance scenarios demonstrating both automated approval and
 
 
 ### NOTE
----
 
 ## Sample Data & Testing
 
