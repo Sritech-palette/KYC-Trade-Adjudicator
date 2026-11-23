@@ -41,7 +41,7 @@ The workflow is implemented as a stateful **LangGraph** state machine backed by 
 ## Quickstart
 
 ### 1. Prerequisites
-- Python **3.11+** (tested on Python 3.14)
+- Python **3.11+** (tested on Python 3.14 and 3.16)
 - A Google Gemini API key
 
 ### 2. Installation
@@ -54,12 +54,20 @@ python -m venv .venv
 
 pip install -U langgraph langchain-google-genai pydantic pytest
 
-Configure Environment Variable
-Set your API key in your PowerShell session (never commit secrets or .env files): $env:GOOGLE_API_KEY="your-gemini-api-key"
+### 3. Configure Environment Variable
+Set your API key in your PowerShell session: $env:GOOGLE_API_KEY="your-gemini-api-key"
 
-Usage & Verification
+### 4. Usage & Verification
 Run Unit Tests: Verify schema validation and math-mismatch rules before running the graph
 
-Run the Adjudication Workflow
+### 5. Run the Adjudication Workflow
 Execute sample trade finance scenarios demonstrating both automated approval and Human-in-the-Loop review: python graph.py
 
+
+---
+
+## Challenges & Solutions
+
+- **Missing Python Dependencies:** Installing `langgraph`, `langchain-google-genai`, `pydantic`, and `pytest` inside a dedicated virtual environment resolved missing-module errors and made runs repeatable across setups.
+- **Gemini Model Availability (`2.5` vs. `3.5`):** When one Gemini tier was busy or unavailable during testing, switching across `gemini-2.5` / `gemini-3.5-flash-lite` alongside timeout and retry handling kept extraction moving reliably.
+- **Edge Cases & HITL Serialization:** Handling missing or `null` `buyer_name` values (normalized to `"Unknown"`), checking line-item arithmetic, and using `JsonPlusSerializer` ensured `human_review` interrupts and resumes stayed intact.
